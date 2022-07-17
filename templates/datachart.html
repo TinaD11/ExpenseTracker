@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block style %}
+       
+
+        tr:nth-child(even) {
+        background-color: #dddddd;
+        }
+        
+
+{% endblock style %}
+{% block content %}
+<div class="back">
+  <div class="div-center">
+    <div class="content">
+	<div class="box">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+		</div>
+      <h3>Expense Details</h3>
+      <hr />
+
+    <p id="bigtxt" style="text-decoration: underline;"><span style="font-weight: bold; color:blue;text-decoration: none;">Hi {{name}} ! </span> Your Expense Details:  </p>
+      
+          <div class="table-responsive">      
+        <table class="table table-sm table-dark">
+        <tr class="bg-primary">
+            <th>Category</th>
+            <th>Description</th>
+            <th>Expense</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for i in data %}
+            <tr>
+                <td>{{i.category}}</td>
+                <td>{{i.desc}}</td>
+                <td>{{i.expense}}</td>
+                <td>{{i.datetime}}</td>
+            </tr>
+        {% endfor %}
+
+        </table>
+ </div>
+    <div class="" style="display:flex;">
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+    </div>
+
+
+  
+  </div>
+  </div>
+
+<script>
+Cloth={{cloth}}
+entertainment={{entertainment}}
+groc={{groc}}
+food={{food}}
+fuel={{fuel}}
+Health={{health}}
+salary={{salary}}
+savings={{saving}}
+
+var xValues = ["Cloting", "Entertainment", "Grocery", "Food", "Fuel","Health","Salary","Savings"];
+var yValues = [Cloth,entertainment,groc,food,fuel,Health,salary,savings];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145",
+  "#fcba03",
+  "#0bfc03",
+  "#f803fc"
+];
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Expernses Chart"
+    }
+  }
+});
+</script>
+
+{% endblock  %}

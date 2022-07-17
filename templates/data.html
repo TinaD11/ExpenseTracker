@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block style %}
+       
+
+        tr:nth-child(even) {
+        background-color: #dddddd;
+        }
+        
+{% endblock style %}
+{% block content %}
+<div class="back">
+  <div class="div-center">
+    <div class="content">
+	<div class="box">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+		</div>
+      <h3>Expense Details</h3>
+      <hr />
+
+    <p id="bigtxt" style="text-decoration: underline;"><span style="font-weight: bold; color:blue;text-decoration: none;">Hi {{name}} ! </span> Your Expense Details:  </p>
+   
+              <div class="table-responsive">          
+        <table class="table table-sm table-dark">
+        <tr class="bg-primary">
+            <th>Category</th>
+            <th>Description</th>
+            <th>Expense</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for i in data %}
+            <tr>
+                <td>{{i.category}}</td>
+                <td>{{i.desc}}</td>
+                <td>{{i.expense}}</td>
+                <td>{{i.datetime}}</td>
+            </tr>
+        {% endfor %}
+
+        </table>
+		</div>
+   
+	
+	
+    </div>
+
+
+  
+  </div>
+  </div>
+{% endblock %}
